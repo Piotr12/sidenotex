@@ -1,0 +1,18 @@
+<!-- main/templates/main/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - Login{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h1>Login</h1>
+    <form class="pure-form pure-form-stacked" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <label for="token">Token</label>
+            <input id="token" type="text" name="token" placeholder="Enter your token" required>
+            <button type="submit" class="pure-button pure-button-primary">Login</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- main/templates/main/account_created.html -->
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - Account Created{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h1>Account Created</h1>
+    <p>Your account has been created. A token to log in awaits in your inbox.</p>
+    <p>
+        <a class="pure-button" href="{% url 'login' %}">Go to Login</a>
+    </p>
+</div>
+{% endblock %}

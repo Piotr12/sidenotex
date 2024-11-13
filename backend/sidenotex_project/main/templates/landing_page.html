@@ -1,0 +1,21 @@
+<!-- main/templates/main/landing_page.html -->
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - Welcome{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h1>Welcome to sidenotex</h1>
+    <form class="pure-form pure-form-stacked" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="pure-button pure-button-primary">Start Annotating</button>
+        </fieldset>
+    </form>
+    <p>
+        <a href="{% url 'login' %}">Already have a token? Login</a>
+    </p>
+</div>
+{% endblock %}

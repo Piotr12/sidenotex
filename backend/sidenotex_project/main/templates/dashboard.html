@@ -1,0 +1,13 @@
+<!-- main/templates/main/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - Dashboard{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h1>Welcome to sidenotex, {{ email }}</h1>
+    <p>
+        <a class="pure-button" href="{% url 'logout' %}">Logout</a>
+    </p>
+</div>
+{% endblock %}
