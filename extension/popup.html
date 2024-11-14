@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sidenotex</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="tabs">
+    <button id="sidenotesTab">Sidenotes</button>
+    <button id="authTab">Auth</button>
+  </div>
+  <div id="content">
+    <!-- Sidenotes Content -->
+    <div id="sidenotesContent">
+      <h2>Sidenotes</h2>
+      <div id="sidenotesList"></div>
+      <form id="createSidenoteForm">
+        <textarea id="sidenoteText" placeholder="Enter your sidenote here"></textarea>
+        <button type="submit">Create Sidenote</button>
+      </form>
+    </div>
+    <!-- Auth Content -->
+    <div id="authContent" style="display: none;">
+      <h2>Authentication</h2>
+      <form id="authForm">
+        <input type="text" id="tokenInput" placeholder="Enter your token">
+        <button type="submit">Save Token</button>
+      </form>
+      <button id="openHomepage">Create Account</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
