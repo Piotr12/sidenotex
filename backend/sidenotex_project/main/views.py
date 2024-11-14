@@ -54,7 +54,10 @@ def login_view(request):
 @login_required
 def dashboard(request):
     user = CustomUser.objects.get(id=request.session['user_id'])
-    return render(request, 'dashboard.html', {'email': user.email})
+    return render(request, 'dashboard.html', {
+        'email': user.email,
+        'user_domain': user.user_domain
+    })
 
 def login_view(request):
     if request.method == 'POST':
