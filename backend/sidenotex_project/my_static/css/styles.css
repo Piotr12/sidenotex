@@ -36,3 +36,26 @@ h1 {
 .pure-button {
     margin-top: 10px;
 }
+.sidenote-item {
+    border: 1px solid #ddd;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+
+.sidenote-actions {
+    margin-top: 0.5em;
+}
+
+.button-error {
+    background: rgb(202, 60, 60);
+    color: white;
+}
+
+.messages {
+    padding: 1em;
+    margin: 1em 0;
+    background: #dff0d8;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+}

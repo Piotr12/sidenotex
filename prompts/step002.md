@@ -2,9 +2,12 @@
 
 I switched to Cursor (Claude 3.5 sonnet) to modify the code further. 
 
-There was a series of actions.
+There was a series of actions here:
 + extend a user Model
 + create an annotation Model 
++ handle annotations
+
+To my surprise there is even some check if user is owning a sidenote before allowing an edit.
 
 # Prompts 
 
@@ -23,3 +26,8 @@ lets add one more model. It is called Sidenote and contains the following fields
 + Text => a long description users will be adding)
 + Author => a foreign key to the user table
 + Domain => string, user domain (duplicate, for easier selection of annotations by domain)
+
+## Step002.3
+
+On User dashboard list the Sidenotes User Created, allow adding new one, editing or removing existing one. 
+
