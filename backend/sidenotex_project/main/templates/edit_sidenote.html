@@ -6,9 +6,17 @@
 <div class="center">
     <h1>Edit Sidenote</h1>
     
-    <form method="post" class="pure-form pure-form-stacked">
+    <form method="post" class="pure-form pure-form-stacked edit-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+        <div class="form-field">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <span class="error">{{ field.errors }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
         <button type="submit" class="pure-button pure-button-primary">Save Changes</button>
         <a href="{% url 'dashboard' %}" class="pure-button">Cancel</a>
     </form>

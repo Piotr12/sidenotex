@@ -5,6 +5,7 @@ from django.urls import path
 from main import views
 from django.conf import settings
 from django.conf.urls.static import static
+from main import api_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +16,9 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('sidenote/<int:pk>/edit/', views.edit_sidenote, name='edit_sidenote'),
     path('sidenote/<int:pk>/delete/', views.delete_sidenote, name='delete_sidenote'),
+    path('api/sidenotes/', api_views.list_sidenotes, name='api_list_sidenotes'),
+    path('api/sidenotes/create/', api_views.create_sidenote, name='api_create_sidenote'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
