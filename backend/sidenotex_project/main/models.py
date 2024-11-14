@@ -1,6 +1,8 @@
 from django.db import models
 import uuid
 from django.utils import timezone
+from django.core.validators import URLValidator
+
 
 class CustomUser(models.Model):
     email = models.EmailField(unique=True)
@@ -16,3 +18,24 @@ class CustomUser(models.Model):
 
     def __str__(self):
         return self.email
+    
+class Sidenote(models.Model):
+    url = models.URLField(max_length=2000, validators=[URLValidator()])
+    text = models.TextField()
+    author = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    domain = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.domain and self.author:
+            self.domain = self.author.user_domain
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.author.email} - {self.url[:50]}..."
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['domain']),
+            models.Index(fields=['author']),
+        ]
