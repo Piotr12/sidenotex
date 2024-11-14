@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ "$1" == "web" ]; then
+  shift
+  echo "Checking DB connection"
+  #scripts/waitfordb
+  echo "Collecting static files"
+  python manage.py collectstatic --no-input
+  echo "Applying migrations"
+  python manage.py migrate
+  echo "Running production server"
+  uvicorn sidenotex_project.asgi:application --host 0.0.0.0 --port 8001 --workers 4
+elif [ "$1" == "scheduler" ]; then
+  shift
+  exec celery -A app beat -l info $@
+elif [ "$1" == "worker" ]; then
+  shift
+  exec celery -A app worker -l info $@
+elif [ "$1" == "manage" ]; then
+  shift
+  exec python manage.py $@
+else
+    exec "$@"
+fi
