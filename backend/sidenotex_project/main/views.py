@@ -12,6 +12,10 @@ from .models import CustomUser, Sidenote
 from .forms import SidenoteForm  # We'll create this
 from django.contrib import messages
 from django.conf import settings
+from django.core.paginator import Paginator
+from urllib.parse import unquote, quote
+from django.db.models import Q
+
 
 
 def landing_page(request):
@@ -184,3 +188,32 @@ def delete_account(request):
 
 def terms(request):
     return render(request, 'terms.html')
+
+@login_required
+def url_sidenotes(request):
+    search_url = unquote(request.GET.get('url', ''))
+    page_number = request.GET.get('p', 1)
+    user = CustomUser.objects.get(id=request.session['user_id'])
+    
+    sidenotes = None
+    if search_url:
+        # Create URL variants (with and without trailing slash)
+        url_with_slash = search_url if search_url.endswith('/') else f"{search_url}/"
+        url_without_slash = search_url[:-1] if search_url.endswith('/') else search_url
+        
+        sidenotes_list = Sidenote.objects.filter(
+            Q(url=url_with_slash) | Q(url=url_without_slash),
+            domain=user.user_domain
+        ).order_by('-created_at')
+        
+        paginator = Paginator(sidenotes_list, 10)
+        try:
+            sidenotes = paginator.page(page_number)
+        except (ValueError, TypeError):
+            sidenotes = paginator.page(1)
+    
+    return render(request, 'url_sidenotes.html', {
+        'search_url': search_url,
+        'encoded_url': quote(search_url) if search_url else '',
+        'sidenotes': sidenotes,
+    })

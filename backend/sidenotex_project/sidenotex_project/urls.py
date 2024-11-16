@@ -21,6 +21,7 @@ urlpatterns = [
     path('login/<str:token>/', views.direct_login, name='direct_login'),
     path('delete-account/', views.delete_account, name='delete_account'),
     path('terms/', views.terms, name='terms'),
+    path('url-sidenotes/', views.url_sidenotes, name='url_sidenotes'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

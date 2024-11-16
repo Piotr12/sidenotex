@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - URL Sidenotes{% endblock %}
+
+{% block content %}
+<div class="center">
+    <h1>Sidenotes by URL</h1>
+    
+    <div class="search-box">
+        <form method="get" class="pure-form" onsubmit="encodeSearchUrl(event)">
+            <input 
+                type="url" 
+                name="url" 
+                id="search-url"
+                placeholder="Enter URL to search"
+                value="{{ search_url }}"
+                required
+            >
+            <button type="submit" class="pure-button pure-button-primary">Search</button>
+        </form>
+    </div>
+
+    <script>
+    function encodeSearchUrl(event) {
+        const urlInput = document.getElementById('search-url');
+        urlInput.value = encodeURIComponent(urlInput.value);
+    }
+    </script>
+
+    {% if search_url %}
+        <h2>Showing sidenotes for: {{ search_url }}</h2>
+        
+        {% if sidenotes %}
+            <div class="sidenotes-list">
+                {% for sidenote in sidenotes %}
+                <div class="sidenote-item">
+                    <p class="sidenote-text">{{ sidenote.text }}</p>
+                    <div class="sidenote-footer">
+                        <span class="sidenote-meta">
+                            By {{ sidenote.author.email }} on {{ sidenote.created_at }}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination">
+                {% if sidenotes.has_previous %}
+                    <a href="?url={{ encoded_url }}&p={{ sidenotes.previous_page_number }}" class="pure-button">&laquo; Previous</a>
+                {% endif %}
+                
+                <span class="current-page">
+                    Page {{ sidenotes.number }} of {{ sidenotes.paginator.num_pages }}
+                </span>
+
+                {% if sidenotes.has_next %}
+                    <a href="?url={{ encoded_url }}&p={{ sidenotes.next_page_number }}" class="pure-button">Next &raquo;</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="empty-state">No sidenotes found for this URL.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

@@ -18,6 +18,8 @@
             </div>
             <div class="nav-right">
                 {% if request.session.user_id %}
+                    <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                    <a href="{% url 'url_sidenotes' %}" class="nav-link">Search</a>
                     <a href="{% url 'logout' %}" class="nav-link">Logout</a>
                 {% endif %}
                 <img src="{% static 'icon.png' %}" alt="sidenotex icon" class="nav-icon">
