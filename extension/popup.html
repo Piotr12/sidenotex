@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <a href="#" class="logo">sidenotex</a>
+  </header>
   <div id="tabs">
     <button id="sidenotesTab">Sidenotes</button>
     <button id="authTab">Auth</button>
@@ -12,8 +15,9 @@
   <div id="content">
     <!-- Sidenotes Content -->
     <div id="sidenotesContent">
-      <h2>Sidenotes</h2>
-      <div id="sidenotesList"></div>
+      <div id="sidenotesList">
+        <div class="empty-state">Loading...</div>
+      </div>
       <form id="createSidenoteForm">
         <textarea id="sidenoteText" placeholder="Enter your sidenote here"></textarea>
         <button type="submit">Create Sidenote</button>
@@ -21,12 +25,14 @@
     </div>
     <!-- Auth Content -->
     <div id="authContent" style="display: none;">
-      <h2>Authentication</h2>
       <form id="authForm">
-        <input type="text" id="tokenInput" placeholder="Enter your token">
-        <button type="submit">Save Token</button>
+        <textarea id="tokenInput" placeholder="Enter your token" rows="3"></textarea>
+        <div class="button-group">
+          <button type="submit" class="primary-button">Save Token</button>
+          <button type="button" id="checkToken" class="secondary-button">Check Token</button>
+        </div>
       </form>
-      <button id="openHomepage">Create Account</button>
+      <a href="https://sidenotex.com" id="openHomepage" class="create-account-link">Create Account</a>
     </div>
   </div>
   <script src="popup.js"></script>

@@ -18,3 +18,11 @@ how to sort this out. For example I want user to be able to store annotation for
 
 ---
 no, lets encode URL instead (your solution still uses a named param that can be used also withint the URL).
+
+---
+
+great, do add a link to dashboard if user is logged in (next to logout and search)
+
+---
+in the url_sidenotes, lets have the search done for url and for an url with / suffix (looks like some users add it and some dont)
+

@@ -1,42 +1,201 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  --border-color: #e2e8f0;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  width: 300px;
+  font-family: 'Inter', Arial, sans-serif;
+  width: 366px;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 #tabs {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 10px;
+  background: white;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.logo:hover {
+  text-decoration: underline;
 }
 
 #tabs button {
   flex: 1;
-  padding: 10px;
+  padding: 8px 16px;
+  margin: 0 5px;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+#tabs button:hover {
+  background-color: var(--border-color);
 }
 
 #content {
-  padding: 10px;
+  padding: 16px;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--text-color);
 }
 
 #sidenotesList {
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .sidenote {
-  background-color: #f1f1f1;
-  padding: 5px;
-  margin-bottom: 5px;
+  background: white;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.sidenote:hover {
+  transform: translateY(-2px);
 }
 
 #sidenoteText {
   width: 100%;
-  height: 60px;
+  height: 80px;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+#sidenoteText:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 button {
   width: 100%;
   padding: 10px;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+#tokenInput {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+}
+
+#tokenInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.create-account-link {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.create-account-link:hover {
+  text-decoration: underline;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+.secondary-button {
+  background-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.secondary-button:hover {
+  background-color: #d1d5db !important;
+}
+
+.button-error {
+  background-color: #ef4444 !important;
+  color: white !important;
+}
+
+.button-success {
+  background-color: #22c55e !important;
+  color: white !important;
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.empty-state {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 1rem 0;
 }
