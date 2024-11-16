@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - About{% endblock %}
+
+{% block content %}
+<div class="center">
+    <div class="terms-content">
+        <h2>What is sidenotex?</h2>
+        <p>
+            sidenotex (side notes extension) is a collaborative web annotation tool that lets teams share notes and insights about web pages 
+            within their organization. Think of it as shared margins for the web, where colleagues can leave thoughts 
+            and comments that are visible to everyone in their company domain.
+        </p>
+
+        <h2>How it works</h2>
+        <p>
+            The main interface to sidenotex is our Chrome Extension, which lets you:
+        </p>
+        <ul>
+            <li>(1) <b>Add</b> annotations to any webpage in a click of a button</li>
+            <li>(2) <b>See</b> your colleagues' annotations as you browse</li>
+            <li>(1+2=3) <b>Share</b> insights and knowledge within your organization</li>
+        </ul>
+
+        <h2>Privacy & Sharing</h2>
+        <p>
+            Your annotations are only presented to others in your organization (those with the same email domain). 
+            This creates a safe space for internal knowledge sharing while maintaining privacy between different organizations.
+        </p>
+
+        <h2>Get Started</h2>
+        <p>Install our Chrome Extension to start annotating:</p>
+        <div style="text-align: center; margin: 2rem 0;">
+            <button id="chromeStoreButton" class="pure-button pure-button-primary disabled-button">
+                Add to Chrome →
+            </button>
+            <p class="extension-note">
+                While Google reviews the extension you can download it from 
+                <a href="https://github.com/Piotr12/sidenotex" target="_blank">Github</a>
+                <br/>
+                <br/>
+                <b>Note:</b> You need to <a href="https://certera.com/kb/how-to-manually-install-a-chrome-extension-in-2-ways/">manually </a> install the extension. 
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('chromeStoreButton').addEventListener('click', function() {
+    this.classList.add('button-error');
+    this.textContent = 'Not Published Yet';
+    
+    setTimeout(() => {
+        this.classList.remove('button-error');
+        this.textContent = 'Add to Chrome →';
+    }, 2000);
+});
+</script>
+{% endblock %}

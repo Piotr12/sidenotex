@@ -3,21 +3,15 @@ import uuid
 from django.utils import timezone
 from django.core.validators import URLValidator
 
-
 class CustomUser(models.Model):
-    email = models.EmailField(unique=True)
-    token = models.CharField(max_length=64, unique=True)
+    email_hash = models.CharField(max_length=256, unique=True)
+    token = models.CharField(max_length=32, unique=True)
     created_at = models.CharField(max_length=19)  # 'YYYY-MM-DD HH:MM:SS'
     created_ip = models.GenericIPAddressField()
-    user_domain = models.CharField(max_length=255)  # New field
-
-    def save(self, *args, **kwargs):
-        if self.email:
-            self.user_domain = self.email.split('@')[1]
-        super().save(*args, **kwargs)
+    user_domain = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.email
+        return f"User {self.id} ({self.user_domain})"
     
 class Sidenote(models.Model):
     url = models.URLField(max_length=2000, validators=[URLValidator()])
@@ -32,7 +26,7 @@ class Sidenote(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.author.email} - {self.url[:50]}..."
+        return f"Note by User {self.author.id} - {self.url[:50]}..."
 
     class Meta:
         indexes = [

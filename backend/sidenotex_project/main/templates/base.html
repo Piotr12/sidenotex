@@ -22,6 +22,7 @@
                     <a href="{% url 'url_sidenotes' %}" class="nav-link">Search</a>
                     <a href="{% url 'logout' %}" class="nav-link">Logout</a>
                 {% endif %}
+                <a href="{% url 'about' %}" class="nav-link">About</a>
                 <img src="{% static 'icon.png' %}" alt="sidenotex icon" class="nav-icon">
             </div>
         </div>
@@ -31,6 +32,9 @@
         {% endblock %}
     </main>
     <footer class="footer">
+        {% if request.session.user_id %}
+            <p class="domain-info">your sidenotes are shared with others in <strong>{{ user_domain }}</strong> domain</p>
+        {% endif %}
         <p>© 2024 sidenotex - Annotate the web, together. <a href="{% url 'terms' %}">Terms of Service</a></p>
     </footer>
 </body>

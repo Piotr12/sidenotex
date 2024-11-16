@@ -15,24 +15,34 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from urllib.parse import unquote, quote
 from django.db.models import Q
+from hashlib import sha256
 
 
 
 def landing_page(request):
+    if 'user_id' in request.session:
+        return redirect('dashboard')
+        
     if request.method == 'POST':
         email = request.POST.get('email')
         ip = get_client_ip(request)
-        user, created = CustomUser.objects.get_or_create(email=email, defaults={
+        
+        # Extract domain from email before hashing
+        user_domain = email.split('@')[1].lower()
+        
+        # Create a hash of the email
+        email_hash = sha256(email.lower().encode()).hexdigest()
+        
+        # Use the email hash instead of email for user lookup/creation
+        user, created = CustomUser.objects.get_or_create(email_hash=email_hash, defaults={
             'token': uuid.uuid4().hex,
             'created_at': timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
             'created_ip': ip,
+            'user_domain': user_domain,  # Set the domain here
         })
         try:
             # Try sending mail
 
-            print(f"Email settings check:")
-            print(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
-            print(f"EMAIL_HOST_PASSWORD length: {len(settings.EMAIL_HOST_PASSWORD)}")
            
             html_content = f"""
                 <html>
@@ -132,8 +142,7 @@ def dashboard(request):
         form = SidenoteForm()
 
     return render(request, 'dashboard.html', {
-        'email': user.email,
-        'user_domain': user.user_domain,
+        'email': user.email_hash,
         'sidenotes': sidenotes,
         'form': form
     })
@@ -217,3 +226,6 @@ def url_sidenotes(request):
         'encoded_url': quote(search_url) if search_url else '',
         'sidenotes': sidenotes,
     })
+
+def about(request):
+    return render(request, 'about.html')
