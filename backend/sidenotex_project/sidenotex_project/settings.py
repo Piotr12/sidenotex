@@ -151,4 +151,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # sidenotex_project/settings.py
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'pro3.mail.ovh.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'contact@sidenotex.com'  # Replace with your OVH email
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = 'contact@sidenotex.com'  # Should match EMAIL_HOST_USER
+SERVER_EMAIL = 'contact@sidenotex.com'  # Should match EMAIL_HOST_USER
+EMAIL_TIMEOUT = 30

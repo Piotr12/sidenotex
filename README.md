@@ -11,9 +11,8 @@ I hope to get to a fully operational solution here.
 
 + Nov 13th - started, for approx 60 minutes
 + Nov 14th - website there after another 90 minutes, with also a Chrome Extension thats currently not testable. Up till that point I edited a label or two and removed some unnecessary code, nothing more (nothing added especially). 
-+ What is next: 
-    + get email sending working
-    + check if the extension does anything :)
++ Nov 16th - 120 minutes running in circles for sendmail to work, postfix, dns edits. Ended with hosted email and terrible handling of secrets. Not a good session.  
+
 
 ## License
 

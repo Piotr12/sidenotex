@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import CustomUser, Sidenote
 from .forms import SidenoteForm  # We'll create this
 from django.contrib import messages
-
+from django.conf import settings
 
 
 def landing_page(request):
@@ -23,13 +23,28 @@ def landing_page(request):
             'created_at': timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
             'created_ip': ip,
         })
-        # Send email with the token
-        send_mail(
-            'Your sidenotex Token',
-            f'Your login token is: {user.token}',
-            'no-reply@sidenotex.com',
-            [email],
-        )
+        try:
+            # Try sending mail
+
+            print(f"Email settings check:")
+            print(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
+            print(f"EMAIL_HOST_PASSWORD length: {len(settings.EMAIL_HOST_PASSWORD)}")
+           
+            send_mail(
+                'Your sidenotex Token',
+                f'Your login token is: {user.token}',
+                'contact@sidenotex.com',
+                [email],
+                fail_silently=False
+            )
+            print("Email sent successfully")
+        except Exception as e:
+            import traceback
+            print(f"Error sending email: {str(e)}")
+            print("Full traceback:")
+            print(traceback.format_exc())
+            return HttpResponse(f"Error sending email: {str(e)}", status=500)
+            
         return redirect('account_created')
     return render(request, 'landing_page.html')
 

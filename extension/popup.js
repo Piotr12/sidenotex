@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
           alert('Please set your token in the Auth tab.');
           return;
         }
-        fetch(`http://localhost:8000/api/sidenotes/?url=${encodeURIComponent(url)}`, {
+        fetch(`https://sidenotex.com/api/sidenotes/?url=${encodeURIComponent(url)}`, {
           method: 'GET',
           headers: {
             'Authorization': 'Token ' + token
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
           alert('Please set your token in the Auth tab.');
           return;
         }
-        fetch('http://localhost:8000/api/sidenotes/create/', {
+        fetch('https://sidenotex.com/api/sidenotes/create/', {
           method: 'POST',
           headers: {
             'Authorization': 'Token ' + token,

@@ -2,6 +2,14 @@
 
 set -e
 
+if [ -f DJANGO_SUPERUSER_PASSWORD ]; then
+    export DJANGO_SUPERUSER_PASSWORD=$(cat DJANGO_SUPERUSER_PASSWORD)
+fi
+
+if [ -f EMAIL_HOST_PASSWORD ]; then
+    export EMAIL_HOST_PASSWORD=$(cat EMAIL_HOST_PASSWORD)
+fi
+
 if [ "$1" == "web" ]; then
   shift
   echo "Checking DB connection"

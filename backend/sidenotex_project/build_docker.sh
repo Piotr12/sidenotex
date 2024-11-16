@@ -1,2 +1,2 @@
 #!/bin/zsh
-docker build -t sidenotex .
+docker build --build-arg DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD --build-arg EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD -t sidenotex .
