@@ -4,21 +4,27 @@
 
 {% block content %}
 <div class="center">
-    <h1>Edit Sidenote</h1>
-    
-    <form method="post" class="pure-form pure-form-stacked edit-form">
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="form-field">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.errors %}
-            <span class="error">{{ field.errors }}</span>
-            {% endif %}
+    <div class="dashboard-section">
+        <div class="annotation-form-box">
+            <form method="post" class="pure-form pure-form-stacked">
+                {% csrf_token %}
+                <fieldset class="form-fields">
+                    {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                        <span class="field-error">{{ field.errors }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="form-actions">
+                        <button type="submit" class="pure-button pure-button-primary">Save Changes</button>
+                        <a href="{% url 'dashboard' %}" class="pure-button">Cancel</a>
+                    </div>
+                </fieldset>
+            </form>
         </div>
-        {% endfor %}
-        <button type="submit" class="pure-button pure-button-primary">Save Changes</button>
-        <a href="{% url 'dashboard' %}" class="pure-button">Cancel</a>
-    </form>
+    </div>
 </div>
 {% endblock %}

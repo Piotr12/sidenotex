@@ -30,12 +30,43 @@ def landing_page(request):
             print(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
             print(f"EMAIL_HOST_PASSWORD length: {len(settings.EMAIL_HOST_PASSWORD)}")
            
+            html_content = f"""
+                <html>
+                <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                        <h2 style="color: #2c3e50;">Welcome to sidenotex!</h2>
+                        
+                        <p>Thank you for signing up. Click the button below to log in:</p>
+                        
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="https://sidenotex.com/login/{user.token}" 
+                            style="background-color: #2563eb; color: white; padding: 12px 24px; 
+                                    text-decoration: none; border-radius: 6px; font-weight: 500;">
+                                Log In to sidenotex
+                            </a>
+                        </div>
+
+                        <p style="margin-top: 30px;">Or copy your login token below and use it at <a href="https://sidenotex.com/login">sidenotex.com/login</a>:</p>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                                    font-family: monospace; font-size: 18px;">
+                            {user.token}
+                        </div>
+
+                        <p style="color: #7f8c8d; font-size: 14px; margin-top: 30px;">
+                            For security reasons, please keep this token private. If you didn't request this email, please ignore it.
+                        </p>
+                    </div>
+                </body>
+                </html>
+                """
+
             send_mail(
-                'Your sidenotex Token',
-                f'Your login token is: {user.token}',
+                'Welcome to sidenotex - Your Login Token',
+                f'Your login token is: {user.token}\nVisit https://sidenotex.com/login to log in.',  # Plain text version
                 'contact@sidenotex.com',
                 [email],
-                fail_silently=False
+                fail_silently=False,
+                html_message=html_content
             )
             print("Email sent successfully")
         except Exception as e:
@@ -59,6 +90,14 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+def direct_login(request, token):
+    try:
+        user = CustomUser.objects.get(token=token)
+        request.session['user_id'] = user.id
+        return redirect('dashboard')
+    except CustomUser.DoesNotExist:
+        messages.error(request, 'Invalid or expired token')
+        return redirect('login')
 
 def login_view(request):
     if request.method == 'POST':

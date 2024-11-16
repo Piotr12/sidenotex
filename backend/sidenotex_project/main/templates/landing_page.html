@@ -5,17 +5,33 @@
 
 {% block content %}
 <div class="center">
-    <h1>Welcome to sidenotex</h1>
-    <form class="pure-form pure-form-stacked" method="post">
-        {% csrf_token %}
-        <fieldset>
-            <label for="email">Email Address</label>
-            <input id="email" type="email" name="email" placeholder="Enter your email" required>
-            <button type="submit" class="pure-button pure-button-primary">Start Annotating</button>
-        </fieldset>
-    </form>
-    <p>
-        <a href="{% url 'login' %}">Already have a token? Login</a>
+    <h1>Annotate the Web, Together</h1>
+    <p class="hero-text">
+        Create, share, and discover annotations across your organization.<br>
+        All you need is your work email and a tiny little Chrome extension to get started.
     </p>
+    
+    <div class="signup-box">
+        <form class="pure-form pure-form-stacked" method="post">
+            {% csrf_token %}
+            <fieldset class="form-fields">
+                <label for="email">Work Email Address</label>
+                <input 
+                    id="email" 
+                    type="email" 
+                    name="email" 
+                    placeholder="you@company.com" 
+                    required
+                    class="email-input"
+                >
+                <button type="submit" class="pure-button pure-button-primary">
+                    Start Annotating →
+                </button>
+            </fieldset>
+        </form>
+        <p class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Log in</a>
+        </p>
+    </div>
 </div>
 {% endblock %}

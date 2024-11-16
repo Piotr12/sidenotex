@@ -5,14 +5,32 @@
 
 {% block content %}
 <div class="center">
-    <h1>Login</h1>
-    <form class="pure-form pure-form-stacked" method="post">
-        {% csrf_token %}
-        <fieldset>
-            <label for="token">Token</label>
-            <input id="token" type="text" name="token" placeholder="Enter your token" required>
-            <button type="submit" class="pure-button pure-button-primary">Login</button>
-        </fieldset>
-    </form>
+    <h1>Welcome Back</h1>
+    <p class="hero-text">
+        Enter your token to continue annotating
+    </p>
+    
+    <div class="signup-box">
+        <form class="pure-form pure-form-stacked" method="post">
+            {% csrf_token %}
+            <fieldset class="form-fields">
+                <label for="token">Login Token</label>
+                <input 
+                    id="token" 
+                    type="text" 
+                    name="token" 
+                    placeholder="Paste your token here" 
+                    required
+                    class="email-input"
+                >
+                <button type="submit" class="pure-button pure-button-primary">
+                    Login →
+                </button>
+            </fieldset>
+        </form>
+        <p class="login-link">
+            Need a token? <a href="{% url 'landing_page' %}">Sign up</a>
+        </p>
+    </div>
 </div>
 {% endblock %}
