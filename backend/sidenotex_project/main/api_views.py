@@ -28,11 +28,11 @@ def list_sidenotes(request):
     if not url:
         return JsonResponse({'error': 'URL parameter is required'}, status=400)
 
-    # Filter sidenotes by domain and URL
+    # Filter sidenotes by domain and URL, order by created_at descending, limit to 6
     sidenotes = Sidenote.objects.filter(
         domain=user.user_domain,
         url=url
-    ).values('text', 'created_at', 'author__email')
+    ).order_by('-created_at')[:6].values('text', 'created_at', 'author__email')
 
     return JsonResponse({'sidenotes': list(sidenotes)})
 

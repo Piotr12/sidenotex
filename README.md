@@ -13,7 +13,10 @@ of OpenAI ChatGPT and Cursor (with Claude 3.5 Sonnet).  It is an educational rep
 + Nov 13th - started, for approx 60 minutes
 + Nov 14th - website there after another 90 minutes, with also a Chrome Extension thats currently not testable. Up till that point I edited a label or two and removed some unnecessary code, nothing more (nothing added especially). 
 + Nov 16th - 120 minutes running in circles for sendmail to work, postfix, dns edits. Ended with hosted email and terrible handling of secrets. Not a good session.  
-+ Nov 16th, second session - 30 minutes of fun with formatting (email body, pages). No issues whatsoever. And fixed the previous session (step005) unnecessary complexity on env variables.
++ Nov 16th, second session - 50 minutes of fun with formatting (email body, pages). No issues whatsoever. And fixed the previous session (step005) unnecessary complexity on env variables.
++ Next: update the extension so it 
+  + does not look that ugly
+  + modify the api so it returns up to 6 entries (extension will show 5 but will know there is more to show)
 
 ## License
 

@@ -171,3 +171,16 @@ def login_view(request):
 def logout_view(request):
     request.session.flush()
     return redirect('landing_page')
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = CustomUser.objects.get(id=request.session['user_id'])
+        user.delete()  # This will also delete all associated sidenotes due to CASCADE
+        request.session.flush()
+        messages.success(request, 'Your account has been permanently deleted.')
+        return redirect('landing_page')
+    return redirect('dashboard')
+
+def terms(request):
+    return render(request, 'terms.html')

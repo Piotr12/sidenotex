@@ -373,3 +373,33 @@ h1 {
     background-color: #d1d5db;
 }
 
+.terms-content {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.terms-content h2 {
+    color: var(--text-color);
+    margin-top: 2rem;
+}
+
+.terms-content ul {
+    margin-left: 2rem;
+}
+
+.delete-account {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.delete-account-button {
+    background-color: #dc2626 !important;
+    color: white !important;
+}
+
+.delete-account-button:hover {
+    background-color: #b91c1c !important;
+}

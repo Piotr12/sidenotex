@@ -19,6 +19,8 @@ urlpatterns = [
     path('api/sidenotes/', api_views.list_sidenotes, name='api_list_sidenotes'),
     path('api/sidenotes/create/', api_views.create_sidenote, name='api_create_sidenote'),
     path('login/<str:token>/', views.direct_login, name='direct_login'),
+    path('delete-account/', views.delete_account, name='delete_account'),
+    path('terms/', views.terms, name='terms'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
