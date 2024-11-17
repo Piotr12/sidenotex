@@ -51,3 +51,10 @@ there are still references to email here in models.py, can you fix that as well?
 
 ---
 now the domain got empty, I still want to store the domain of the user, just not the email (this should be replaced with hash)
+
+---
+
+my app screen is in static files, called screen.png, find a place for it on the about page. 
+
+---
+

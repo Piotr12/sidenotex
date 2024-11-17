@@ -16,6 +16,7 @@ from django.core.paginator import Paginator
 from urllib.parse import unquote, quote
 from django.db.models import Q
 from hashlib import sha256
+import os
 
 
 
@@ -229,3 +230,34 @@ def url_sidenotes(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def prompts(request):
+    prompts_dir = os.path.join(settings.STATIC_ROOT, 'prompts')
+    prompts_list = []
+    selected_prompt = None
+    
+    try:
+        # Get all .md files and sort them alphabetically
+        files = sorted([f for f in os.listdir(prompts_dir) if f.endswith('.md')])
+        
+        # Create list of all prompts
+        prompts_list = [{'filename': f, 'title': f.replace('.md', '')} for f in files]
+        
+        # Handle selected prompt
+        selected_filename = request.GET.get('prompt')
+        if selected_filename:
+            file_path = os.path.join(prompts_dir, selected_filename)
+            if os.path.exists(file_path):
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    selected_prompt = {
+                        'title': selected_filename.replace('.md', ''),
+                        'content': file.read()
+                    }
+                    
+    except FileNotFoundError:
+        prompts_list = []
+        
+    return render(request, 'prompts.html', {
+        'prompts': prompts_list,
+        'selected_prompt': selected_prompt
+    })

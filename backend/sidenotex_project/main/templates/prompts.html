@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}sidenotex - Prompts Library{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="terms-content">
+        <h2 class="text-2xl font-bold mb-4">Building sidenotex with AI</h2>
+        <div class="intro-text">
+            <p>
+                Welcome to a fascinating experiment! sidenotex is a testament to the power of AI-assisted development - 
+                99% of this application was built through conversations with AI. I set out to explore what's possible 
+                when human creativity meets artificial intelligence.
+            </p>
+            <p>
+                The journey was remarkable: from concept to deployment in under 12 hours of development time. 
+                Below, you'll find the actual conversation trail that brought sidenotex to life. 
+                Every prompt, every iteration, every breakthrough is documented here. 
+                Apart from the "lets also include SMTP server" piece (I wasted a lot of time there) all was smooth sailing. 
+            </p>
+            <p> Yes, above is also AI generated.</p>
+        </div>
+    </div>
+    {% if prompts %}
+        <div class="prompt-selector">
+            <h2>Select a prompt</h2>
+            <form method="get" class="pure-form">
+                <select name="prompt" onchange="this.form.submit()" class="pure-input-1-2">
+                    <option value="">Select a prompt...</option>
+                    {% for prompt in prompts %}
+                        <option value="{{ prompt.filename }}" 
+                                {% if selected_prompt.title == prompt.title %}selected{% endif %}>
+                            {{ prompt.title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        {% if selected_prompt %}
+            <div class="prompt-content">
+                <h2 class="text-xl font-semibold mb-4">{{ selected_prompt.title }}</h2>
+                <div class="prose max-w-none">
+                    {{ selected_prompt.content|linebreaks }}
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+            <div class="flex">
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        No prompts available. Please add some .md files to the prompts directory.
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

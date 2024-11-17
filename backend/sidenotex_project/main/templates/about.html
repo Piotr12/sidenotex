@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}sidenotex - About{% endblock %}
 
@@ -21,7 +22,12 @@
             <li>(2) <b>See</b> your colleagues' annotations as you browse</li>
             <li>(1+2=3) <b>Share</b> insights and knowledge within your organization</li>
         </ul>
-
+        <h2>How it looks</h2>
+        <p>
+            <div class="screenshot-container">
+                <img src="{% static 'screen.png' %}" alt="sidenotex in action" class="app-screenshot">
+            </div>
+        </p>
         <h2>Privacy & Sharing</h2>
         <p>
             Your annotations are only presented to others in your organization (those with the same email domain). 
@@ -42,6 +48,32 @@
                 <b>Note:</b> You need to <a href="https://certera.com/kb/how-to-manually-install-a-chrome-extension-in-2-ways/">manually </a> install the extension. 
             </p>
         </div>
+        <h2>Contact Us</h2>
+        <p>
+            If you have any questions or feedback, please contact us at contact(at)sidenotex(dot)com.
+        </p>
+
+        <h2>99% Generated with AI</h2>
+        <p>
+            sidenotex was generated with AI as a learning exercise. 
+            Mainly using Cursor (<a href="https://cursor.sh/" 
+            target="_blank">https://cursor.sh/</a>). 
+            I am not a professional developer, so please don't judge 
+            the code quality too harshly, I corrected as many issues as I could.
+        </p>
+        <p> What may be interesting for you is to see the prompts used, have a look
+            at (prompts) where you will see all the prompts used.
+        </p>
+        <p> It took less than 12 hours to develop the whole project. Do embrace GenAI!</p>
+
+        <h2>Farewell Cloud</h2>
+        <p> No cloud services were harmed during development.
+            sidenotes is also an experiment on no-cloud development. 
+            It runs on a single VM, with sqlite database. 
+            Deployment is done with the help of 
+            <a href="http://kamal-deploy.org" target="_blank">Kamal</a>.
+        </p>
+
     </div>
 </div>
 

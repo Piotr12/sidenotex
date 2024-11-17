@@ -1,5 +1,6 @@
 <!-- main/templates/main/landing_page.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}sidenotex - Welcome{% endblock %}
 
@@ -33,5 +34,7 @@
             Already have an account? <a href="{% url 'login' %}">Log in</a>
         </p>
     </div>
+
+    
 </div>
 {% endblock %}
