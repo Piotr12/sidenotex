@@ -32,7 +32,7 @@ def list_sidenotes(request):
     sidenotes = Sidenote.objects.filter(
         domain=user.user_domain,
         url=url
-    ).order_by('-created_at')[:6].values('text', 'created_at', 'author__email')
+    ).order_by('-created_at')[:6].values('text', 'created_at', 'author__name')
 
     return JsonResponse({'sidenotes': list(sidenotes)})
 

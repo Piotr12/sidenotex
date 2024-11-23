@@ -129,10 +129,17 @@ def login_view(request):
 @login_required
 def dashboard(request):
     user = CustomUser.objects.get(id=request.session['user_id'])
-    sidenotes = Sidenote.objects.filter(author=user).order_by('-created_at')
     
     if request.method == 'POST':
+        if 'update_name' in request.POST:  # New name update handling
+            new_name = request.POST.get('name', '').strip()
+            if new_name:
+                user.name = new_name
+                user.save()
+                messages.success(request, 'Name updated successfully!')
+            return redirect('dashboard')
         form = SidenoteForm(request.POST)
+
         if form.is_valid():
             sidenote = form.save(commit=False)
             sidenote.author = user
@@ -141,9 +148,12 @@ def dashboard(request):
             return redirect('dashboard')
     else:
         form = SidenoteForm()
-
+    
+    sidenotes = Sidenote.objects.filter(author=user).order_by('-created_at')
+    
     return render(request, 'dashboard.html', {
         'email': user.email_hash,
+        'user_name': user.name,  # Add name to context
         'sidenotes': sidenotes,
         'form': form
     })

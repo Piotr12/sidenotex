@@ -16,6 +16,8 @@
     {% endif %}
 
     <div class="dashboard-section">
+        
+
         <div class="annotation-form-box">
             <form method="post" class="pure-form pure-form-stacked">
                 {% csrf_token %}
@@ -69,6 +71,15 @@
     <form method="post" action="{% url 'delete_account' %}" onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
         {% csrf_token %}
         <button type="submit" class="pure-button delete-account-button">Delete My Account</button>
+    </form>
+</div>
+
+<div class="user-profile">
+    <h3>Change Name</h3>
+    <form method="post" cq>
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ user_name }}" placeholder="Your name">
+        <button type="submit" name="update_name" class="pure-button pure-button-primary">Update Name</button>
     </form>
 </div>
 {% endblock %}
