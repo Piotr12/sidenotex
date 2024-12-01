@@ -37,16 +37,12 @@
         <h2>Get Started</h2>
         <p>Install our Chrome Extension to start annotating:</p>
         <div style="text-align: center; margin: 2rem 0;">
-            <button id="chromeStoreButton" class="pure-button pure-button-primary disabled-button">
+            <a href="https://chromewebstore.google.com/detail/sidenotex/dafbhomkphmbfcnpjnklokmegkakdjop" 
+               target="_blank" 
+               id="chromeStoreButton" 
+               class="pure-button pure-button-primary">
                 Add to Chrome →
-            </button>
-            <p class="extension-note">
-                While Google reviews the extension you can download it from 
-                <a href="https://github.com/Piotr12/sidenotex" target="_blank">Github</a>
-                <br/>
-                <br/>
-                <b>Note:</b> You need to <a href="https://certera.com/kb/how-to-manually-install-a-chrome-extension-in-2-ways/">manually </a> install the extension. 
-            </p>
+            </a>
         </div>
         <h2>Contact Us</h2>
         <p>
@@ -77,15 +73,4 @@
     </div>
 </div>
 
-<script>
-document.getElementById('chromeStoreButton').addEventListener('click', function() {
-    this.classList.add('button-error');
-    this.textContent = 'Not Published Yet';
-    
-    setTimeout(() => {
-        this.classList.remove('button-error');
-        this.textContent = 'Add to Chrome →';
-    }, 2000);
-});
-</script>
 {% endblock %}
